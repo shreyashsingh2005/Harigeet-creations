@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+:root {
+  --ivory: #FDFCF0;
+  --beige: #F5EFE6;
+  --champagne: #D4AF37;
+  --burgundy: #7A1E28;
+  --burgundy-dark: #5C151D;
+  --dusty-rose: #DCAE96;
+  --gray-800: #2C2C2C;
+  --gray-900: #1A1A1A;
+}
+
+@theme inline {
+  --color-ivory: var(--ivory);
+  --color-beige: var(--beige);
+  --color-champagne: var(--champagne);
+  --color-burgundy: var(--burgundy);
+  --color-burgundy-dark: var(--burgundy-dark);
+  --color-dusty-rose: var(--dusty-rose);
+
+  --font-serif: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: var(--font-lato), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+  background-color: var(--ivory);
+  color: var(--gray-900);
+  /* 3D Texture Overlay: Subtle noise grain + Soft ambient lighting */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(212,175,55,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(122,30,40,0.04) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* 4K Resolution Scaling: Upscale the main container globally */
+@media (min-width: 1440px) {
+  .max-w-7xl {
+    max-width: 2000px !important;
+  }
+}
+@media (min-width: 2560px) {
+  .max-w-7xl {
+    max-width: 3000px !important;
+  }
+}
+
+/* Custom 3D utilities for elements */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, filter 0.4s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 40px -10px rgba(122, 30, 40, 0.15), 
+              inset 0 1px 0 rgba(255,255,255,0.6);
+  filter: brightness(1.05);
+}
+
+.texture-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px 0 rgba(122, 30, 40, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* Premium Animations */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeScale {
+  0% { opacity: 0; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes kenBurns {
+  0% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+@keyframes blurReveal {
+  0% { filter: blur(10px); opacity: 0; }
+  100% { filter: blur(0); opacity: 1; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+.animate-fade-scale {
+  animation: fadeScale 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+.animate-ken-burns {
+  animation: kenBurns 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-blur-reveal {
+  animation: blurReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-1000 { animation-delay: 1000ms; }
+
+/* Premium Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #FDF8F5; }
+::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #7A1E28; }
+
+/* Elegant Typography Touches */
+h1, h2, h3, h4, h5, h6 { letter-spacing: 0.02em; }
+p { letter-spacing: 0.01em; }
+.font-serif { font-feature-settings: "liga" 1, "dlig" 1; }
+
+/* Enhanced Hover Lift */
+.hover-lift { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; }
+.hover-lift:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(122, 30, 40, 0.15); }
+
+/* -- Royal animation keyframes (used in hero + other pages) -- */
+@keyframes royal-fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes royal-drop-in { from { opacity: 0; transform: translateY(-24px) scale(0.92); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes royal-letter-pop { from { opacity: 0; transform: translateY(18px) scale(0.85); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes royal-dot-pulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.3); } }
+@keyframes mandala-slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Ensure animated elements become visible after animation completes */
+[style*='royal-fade-up'] { animation-fill-mode: both; }
+[style*='royal-letter-pop'] { animation-fill-mode: both; }
