@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 import CustomCursor from "@/components/ui/CustomCursor";
 import RoyalIntro from "@/components/RoyalIntro";
 
@@ -31,9 +32,11 @@ export default function RootLayout({
       <body className="antialiased min-h-screen flex flex-col font-sans bg-ivory text-gray-900 overflow-x-hidden selection:bg-champagne selection:text-burgundy">
         <RoyalIntro />
         <CustomCursor />
-        <CartProvider>
-          {children}
-        </CartProvider>
+        <WishlistProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </WishlistProvider>
       </body>
     </html>
   );
