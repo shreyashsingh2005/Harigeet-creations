@@ -4,13 +4,16 @@ import Link from "next/link";
 import { Heart, Ruler, MessageCircle } from "lucide-react";
 import { Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 export default function AddToCartSection({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = useState("M");
   const [selectedColor, setSelectedColor] = useState("Pastel Pink");
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
   const [added, setAdded] = useState(false);
+  const isWishlisted = isInWishlist(product.id);
 
   const colors = [
     { id: 'pink', bg: '#f8e1e7', name: 'Pastel Pink' },
@@ -95,8 +98,16 @@ export default function AddToCartSection({ product }: { product: Product }) {
         <Link href="/cart" className="flex-1 bg-gray-900 text-ivory py-4 text-center uppercase tracking-widest font-medium hover:bg-black transition-colors shadow-sm hover-lift block">
           View Inquiry Bag
         </Link>
-        <button className="w-14 sm:w-16 h-14 flex items-center justify-center border border-champagne/50 text-gray-500 hover:text-burgundy hover:border-burgundy transition-colors">
-          <Heart size={20} />
+        <button 
+          onClick={() => toggleWishlist(product)}
+          className={`w-14 sm:w-16 h-14 flex items-center justify-center transition-colors border ${
+            isWishlisted 
+              ? 'bg-[#D4AF37] text-white border-[#D4AF37] hover:bg-[#b08d27]' 
+              : 'border-champagne/50 text-gray-500 hover:text-burgundy hover:border-burgundy'
+          }`}
+          aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+        >
+          <Heart size={20} fill={isWishlisted ? "currentColor" : "none"} />
         </button>
       </div>
 

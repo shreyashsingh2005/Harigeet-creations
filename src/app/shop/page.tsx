@@ -11,7 +11,13 @@ export const metadata = {
   description: "Shop premium Indian ethnic wear, garments, jewellery, and fabrics.",
 };
 
-export default function ShopPage() {
+export default async function ShopPage(props: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  const searchParams = await props.searchParams;
+  const q = typeof searchParams?.q === 'string' ? searchParams.q.toLowerCase() : '';
+  
+  const filteredProducts = q 
+    ? sampleProducts.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))
+    : sampleProducts;
   return (
     <>
       <Header />
@@ -77,7 +83,9 @@ export default function ShopPage() {
           {/* Product Grid */}
           <div className="flex-1 animate-fade-up delay-700">
             <div className="hidden lg:flex justify-between items-center mb-8 pb-4 border-b border-champagne/20">
-              <span className="text-sm text-gray-500 font-serif italic">Showing {sampleProducts.length} bespoke creations</span>
+              <span className="text-sm text-gray-500 font-serif italic">
+                {q ? `Showing ${filteredProducts.length} results for "${q}"` : `Showing ${filteredProducts.length} bespoke creations`}
+              </span>
               
               <div className="flex items-center space-x-3">
                 <span className="text-sm text-gray-600 uppercase tracking-widest text-xs font-medium">Sort by:</span>
@@ -92,13 +100,20 @@ export default function ShopPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
-              {sampleProducts.map((product, i) => (
-                <div key={product.id} className="animate-fade-up" style={{ animationDelay: `${(i % 12) * 50}ms`, opacity: 0 }}>
-                  <ProductCard product={product} />
-                </div>
-              ))}
-            </div>
+            {filteredProducts.length === 0 ? (
+              <div className="py-20 text-center col-span-full">
+                <p className="text-xl text-gray-500 font-serif italic mb-4">No creations found matching your search.</p>
+                <button onClick={() => window.location.href='/shop'} className="text-burgundy uppercase tracking-widest text-sm font-medium hover:underline">View All Collections</button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
+                {filteredProducts.map((product, i) => (
+                  <div key={product.id} className="animate-fade-up" style={{ animationDelay: `${(i % 12) * 50}ms`, opacity: 0 }}>
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </div>
+            )}
             
             <div className="mt-16 flex justify-center pb-12">
               <button className="bg-transparent text-burgundy px-10 py-3.5 text-center uppercase tracking-widest font-medium border border-burgundy hover:bg-burgundy hover:text-ivory transition-all hover-lift rounded-sm shadow-sm">
