@@ -63,8 +63,15 @@ export default function CustomerLogin() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 shadow-sm focus:outline-none focus:ring-champagne focus:border-champagne sm:text-sm" />
+                <div className="flex justify-between items-center">
+                  <label className="block text-sm font-medium text-gray-700">Password</label>
+                  <Link href="/account/forgot-password" className="text-sm font-medium text-[#D4AF37] hover:text-[#b08d27] transition-colors">
+                    Forgot password?
+                  </Link>
+                </div>
+                <div className="mt-1">
+                  <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} className="appearance-none block w-full px-3 py-2 border border-gray-300 shadow-sm focus:outline-none focus:ring-[#D4AF37] focus:border-[#D4AF37] sm:text-sm" />
+                </div>
               </div>
 
               <div>

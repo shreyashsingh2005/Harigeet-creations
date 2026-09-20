@@ -7,15 +7,20 @@ const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
+    const { email, action = "signup" } = await req.json();
 
     if (!email) {
       return NextResponse.json({ message: "Email is required" }, { status: 400 });
     }
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
+    
+    if (action === "signup" && existingUser) {
       return NextResponse.json({ message: "Account already exists" }, { status: 400 });
+    }
+    
+    if (action === "reset" && !existingUser) {
+      return NextResponse.json({ message: "No account found with this email" }, { status: 404 });
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
