@@ -120,7 +120,7 @@ export default function Header() {
                   </span>
                 )}
               </Link>
-              <Link href="/admin" className="text-[#1a0508] hover:text-[#D4AF37] transition-colors hidden sm:block" aria-label="Account">
+              <Link href="/account" className="text-[#1a0508] hover:text-[#D4AF37] transition-colors" aria-label="Account">
                 <User size={22} strokeWidth={1.5} />
               </Link>
               <Link href="/cart" className="text-[#1a0508] hover:text-[#D4AF37] transition-colors relative flex items-center" aria-label="Cart">
@@ -144,6 +144,7 @@ export default function Header() {
           <div className="px-4 py-6 space-y-1 flex flex-col">
             {[
               { name: "Home", href: "/" },
+              { name: "My Account", href: "/account" },
               { name: "Shop", href: "/shop" },
               { name: "Collection", href: "/collection" },
               { name: "New Arrivals", href: "/new-arrivals" },
