@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -120,7 +120,7 @@ export default function Header() {
                   </span>
                 )}
               </Link>
-              <Link href="/account" className="text-[#1a0508] hover:text-[#D4AF37] transition-colors hidden sm:block" aria-label="Account">
+              <Link href="/admin" className="text-[#1a0508] hover:text-[#D4AF37] transition-colors hidden sm:block" aria-label="Account">
                 <User size={22} strokeWidth={1.5} />
               </Link>
               <Link href="/cart" className="text-[#1a0508] hover:text-[#D4AF37] transition-colors relative flex items-center" aria-label="Cart">
