@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth/next";
@@ -43,3 +44,4 @@ export async function GET() {
     return NextResponse.json({ message: "Error" }, { status: 500 });
   }
 }
+
